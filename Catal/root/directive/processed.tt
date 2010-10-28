@@ -1,0 +1,8 @@
+<li>a.スカラー:[% t_scalar %]  配列:[% t_array.0 %]</li>
+
+[%-
+t_scalar = "Ruby On Rails"
+t_array = ['Visual Basic', 'C#', 'Java', 'C++']
+-%]
+
+<li>b.スカラー:[% t_scalar %]  配列:[% t_array.0 %]</li>

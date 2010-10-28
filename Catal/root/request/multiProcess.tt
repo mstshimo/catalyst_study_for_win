@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>マルチポストデータ</title>
+</head>
+<body>
+
+あなたが選択したのは、
+[% fw | html %]
+です。
+
+
+forループで表示
+[% FOREACH item = fw  %]
+	[% item | html %]
+[% END %]
+
+</body>
+</html>
+

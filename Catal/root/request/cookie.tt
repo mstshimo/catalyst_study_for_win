@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>クッキー情報処理</title>
+</head>
+<body>
+
+<form method="POST" action="/request/cookieProcess">
+email:
+<input type="text" name="email" size="40" value="[% email | html %]"/>
+
+<input type="submit" value="送信" />
+
+</form>
+
+</body>
+</html>
+

@@ -1,0 +1,4 @@
+<ul>
+[%- FOREACH item = list -%]
+ <li>[% item.publish %]:[% # item.get_column('avg_price') %]</li>
+[%- END -%]

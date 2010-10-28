@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>ファイルアップロード処理</title>
+</head>
+<body>
+
+<form method="POST" action="/request/uploadProcess" enctype="multipart/form-data">
+ファイル:
+
+<input type="file" name="upfile" size="40" />
+<input type="submit" value="アップロード" />
+
+</form>
+
+</body>
+</html>
+

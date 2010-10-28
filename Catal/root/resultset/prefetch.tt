@@ -1,0 +1,7 @@
+<dl>
+[%- FOREACH item = list -%]
+<dt>[% item.book.title | html %]([% item.uid | html %])</dt>
+<dd>[% item.body | html %]</dd>
+<dd>[% item.updated | html %]</dd>
+[%- END -%]
+</dl>

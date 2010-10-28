@@ -1,0 +1,13 @@
+[%- MACRO select (name, start, end) BLOCK -%]
+<select id="[% name %]" name="[% name %]">
+	[%- FOREACH i = [start .. end] %]
+	<option value="[% i %]">[% i %]</option>
+	[%- END %]
+</select>
+[%- END -%]
+
+誕生日:
+[% select ('year', 1970, 2000) %]年
+[% select ('month', 1, 12) %]月
+[% select ('day', 1, 31) %]日
+

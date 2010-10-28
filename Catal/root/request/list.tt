@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>書籍クエリ情報</title>
+</head>
+<body>
+
+<ul>
+<li>query_paramsのほうの処理</li>
+[% FOREACH item = list %]
+<li>
+<a href="/request/detail?isbn=[% item.isbn | url %]">
+[% item.title | html %]([% item.publish | html %])
+</a>
+</li>
+[% END %]
+
+
+<li>argsのほうの処理</li>
+[% FOREACH item = list %]
+<li>
+<a href="/request/detail/[% item.isbn | url %]">
+[% item.title | html %]([% item.publish | html %])
+</a>
+</li>
+[% END %]
+
+
+</ul>
+</body>
+</html>

@@ -1,0 +1,21 @@
+[%-
+DEFAULT
+
+title = 'Catalyst入門'
+keyword = 'Catalyst, Perl, MVC, フレームワーク'
+descript = 'Catalystを使ったアプリケーション開発の基礎を解説'
+
+-%]
+<html>
+<head>
+<title>[% title %]</title>
+<meta name="keywords" content="[% keyword %]" />
+<meta name="description" content="[% sescript %]" />
+</head>
+
+<body>
+<img src="http://www.wings.msn.to/image/wings.jpg" height="67" width="215" />
+</body>
+
+<hr />
+

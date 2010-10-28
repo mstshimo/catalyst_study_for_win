@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>マルチポストデータ</title>
+</head>
+<body>
+
+<form method="POST" action="/request/multiProcess">
+好きなフレームワークは何ですか？:<br />
+<input type="checkbox" name="fw" value="Catalyst" />Catalyst<br />
+<input type="checkbox" name="fw" value="Ruby on Rails" />Ruby on Rails<br />
+<input type="checkbox" name="fw" value="ASP.NET" />ASP.NET<br />
+<input type="checkbox" name="fw" value="Zend Framework" />Zend Framework<br />
+<input type="checkbox" name="fw" value="Struts" />Struts<br />
+<input type="submit" value="送信" />
+</form>
+
+</body>
+</html>
+

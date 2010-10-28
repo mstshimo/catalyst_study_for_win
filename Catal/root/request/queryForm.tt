@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>クエリ情報</title>
+</head>
+<body>
+
+<form method="GET" action="/request/queryProcess">
+名前:
+<input type="text" name="nam" size="10" maxlength="255" />
+<input type="submit" value="送信" />
+</form>
+</body>
+</html>
+

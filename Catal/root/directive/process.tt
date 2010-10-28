@@ -1,0 +1,11 @@
+[%-
+t_scalar = "Catalyst"
+t_array = ['Perl', 'PHP', 'Ruby', 'Python']
+-%]
+
+<ul>
+<li>1.スカラー:[% t_scalar %]  配列:[% t_array.0 %]</li>
+[% #PROCESS directive/processed.tt %]
+[% INCLUDE directive/processed.tt %]
+<li>2.スカラー:[% t_scalar %]  配列:[% t_array.0 %]</li>
+</ul>

@@ -1,0 +1,17 @@
+[%
+list = [
+		{title => "基礎Perl", publish => "インプレス"},
+		{title => "独習PHP", publish => "翔泳社"},
+		{title => "JavaScriptマスターブック", publish => "マイコミ"},
+		{title => "MySQLで学ぶデータベース超入門", publish => "翔泳社"},
+
+		]
+%]
+
+<ul>
+
+[% FOREACH item IN list %]
+<li>[% item.title%]([% item.publish %])</li>
+[% END %]
+
+</ul>

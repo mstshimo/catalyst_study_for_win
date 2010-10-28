@@ -1,0 +1,6 @@
+<ul>
+<li>配列:[% array_t.1 %]</li>
+<li>ハッシュ:[% hash_t.TT %]</li>
+<li>オブジェクト:[% obj_t.header('User_Agent') %]</li>
+<li>関数:[% func_t('下村', 'hoge', 'poko') %]</li>
+</ul>

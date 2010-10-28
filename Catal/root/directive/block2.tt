@@ -1,0 +1,11 @@
+[%- list = ['Perl', 'PHP', 'Ruby', 'Python'] -%]
+[%- PROCESS directive/block_def.tt -%]
+<ul>
+[%- FOREACH item = list  -%]
+	[%- IF loop.count mod 2 -%]
+		[%- INCLUDE odd x = item -%]
+	[%- ELSE -%]
+		[%- INCLUDE even x = item -%]
+	[%- END -%]
+[%- END -%]
+</ul>

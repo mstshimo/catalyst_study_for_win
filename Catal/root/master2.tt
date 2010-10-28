@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>[% template.title %]</title>
+<meta name="keywords" content="[% template.keyword %]" />
+<meta name="description" content="[% template.dsescript %]" />
+</head>
+
+<body>
+<img src="http://www.wings.msn.to/image/wings.jpg" height="67" width="215" />
+
+<hr />
+
+[% content %]
+
+<hr />
+
+Copyright [% template.author %]. 複製禁止
+
+[%- USE date -%]
+Last-Modified([% template.name %])----[% date.format(template.modtime) %]
+
+</body>
+</html>
+

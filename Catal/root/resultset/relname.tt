@@ -1,0 +1,9 @@
+[% INCLUDE resultset/details.tt %]
+<hr />
+<dl>
+[%- FOREACH item = book.book_review -%]
+<dt>[% item.uid | html %]さん</dt>
+<dd>[% item.body | html %]</dd>
+<dd>[% item.updated | html %]</dd>
+[%- END -%]
+</dl>

@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>ポストデータ</title>
+</head>
+<body>
+
+<form method="POST" action="/request/process">
+名前:
+<input type="text" name="name" size="10" maxlength="255" />
+<input type="submit" value="送信" />
+</form>
+</body>
+</html>
+

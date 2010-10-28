@@ -1,0 +1,2 @@
+[%- BLOCK even -%]<li style="color:Red"><b>[% x %]</b></li>[%- END -%]
+[%- BLOCK odd -%]<li style="color:Cyan"><b>[% x %]</b></li>[%- END -%]

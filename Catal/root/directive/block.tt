@@ -1,0 +1,12 @@
+[%- list = ['Perl', 'PHP', 'Ruby', 'Python'] -%]
+[%- BLOCK even -%]<li style="color:Red"><b>[% x %]</b></li>[%- END -%]
+[%- BLOCK odd -%]<li style="color:Cyan"><b>[% x %]</b></li>[%- END -%]
+<ul>
+[%- FOREACH item = list  -%]
+	[%- IF loop.count mod 2 -%]
+		[%- INCLUDE odd x = item -%]
+	[%- ELSE -%]
+		[%- INCLUDE even x = item -%]
+	[%- END -%]
+[%- END -%]
+</ul>

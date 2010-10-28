@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Template ToolKitの構成要素</title>
+</head>
+<body>
+データは[% list.size %]件です。
+
+<table border="1">
+<tr bgcolor='#FFcc66'>
+<th>ISBNコード</th>
+<th>書名</th>
+<th>価格</th>
+<th>出版社</th>
+<th>刊行日</th>
+</tr>
+
+[% FOREACH item = list %]
+[% #偶数行に色をつける %]
+<tr [% IF loop.index mod 2 != 0 %] bgcolor = '#FFFFCC' [% END %]>
+<td>[% item.isbn | html %]</td>
+<td>[% item.title | html %]</td>
+<td>[% item.price | html %]円</td>
+<td>[% item.publish | html %]</td>
+<td>[% item.published | html %]</td>
+</tr>
+[% END %]
+
+</table>
+
+</body>
+</html>

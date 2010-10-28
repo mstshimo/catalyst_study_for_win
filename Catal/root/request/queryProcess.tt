@@ -1,0 +1,11 @@
+<html>
+<head>
+<title>クエリ情報</title>
+</head>
+<body>
+こんにちは、[% nam | html %]さん
+
+
+</body>
+</html>
+

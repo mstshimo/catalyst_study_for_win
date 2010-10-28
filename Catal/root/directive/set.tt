@@ -1,0 +1,9 @@
+[%- 
+	SET
+	triangle = width * height / 2;
+	square = width * height;
+-%]
+
+三角形の面積:[% triangle %] <br />
+四角形の面積:[% square %]
+

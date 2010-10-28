@@ -1,0 +1,18 @@
+[%- 
+	DEFAULT
+	title = 'Catalyst入門'
+	keyword = "Catalyst, Perl, MVC, フレームワーク"
+	descript = 'Catalystを利用したアプリケーション開発の基礎を解説'
+-%]
+<html>
+<head>
+<title>[% title %]</title>
+<meta name="keyword" content="[% keyword %]" />
+<meta name="discription" content="[% descript %]" />
+</head>
+
+<body>
+test
+
+</body>
+</html>

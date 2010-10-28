@@ -1,0 +1,9 @@
+<html>
+<head>
+<title>Refreshヘッダ</title>
+</head>
+<body>
+
+現在の時刻は、[% now %];
+</body>
+</html>

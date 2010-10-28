@@ -1,0 +1,12 @@
+[%- META
+title = "META命令"
+keyword = "META, ディレクティブ, Catalyst"
+descript = "META命令の説明"
+author = "YAMADA, Yoshifiro"
+
+-%]
+
+[% WRAPPER master2.tt %]
+本文です。
+
+[% END %]
