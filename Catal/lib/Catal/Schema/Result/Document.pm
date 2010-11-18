@@ -54,4 +54,20 @@ __PACKAGE__->set_primary_key("docid");
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
+use XML::Simple;
+__PACKAGE__->inflate_column(
+	'doc',
+	{
+		inflate => sub {
+							XMLin(shift)
+						},
+		deflate => sub {
+						XMLout(
+							shift,
+							RootName => 'doc',
+							NoAttr => 1);
+						},
+	}
+);
+
 1;

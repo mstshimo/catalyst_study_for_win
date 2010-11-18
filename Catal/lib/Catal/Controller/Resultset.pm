@@ -319,8 +319,6 @@ sub prefetch :Local {
 			order_by => {-desc => ['book.published', 'me.updated']}
 		}
 	)];
-	
-
 }
 
 
@@ -336,8 +334,63 @@ sub prefetch2 :Local {
 			order_by => {-desc => ['me.published', 'book_review.updated']}
 		}
 	)];
-	
+}
 
+
+# 2010-11-07
+sub many :Local {
+	my ($self, $c) = @_;
+
+	$c->stash->{list} = [$c->model('CatalDB::Book')->search(
+		{'me.isbn' => '978-4-8443-2699-1'},
+		{
+			prefetch => {'book_review' => 'usr'},
+			order_by => {-desc => ['book_review.updated']}
+		}
+	)];
+}
+
+sub xml_write :Local {
+	my ($self, $c) = @_;
+	my $row = $c->model('CatalDB::Document')->create({
+		docid => 'DC-00',
+		doc => { 
+				 'name' => 'Catalyst(カタリスト)',
+				 'content' => "Perl言語によって記述された、Perl環境で動作するアプリケーションフレームワークの一種です。\nPerl環境で利用可能なフレームワークといった場合、Catalystが唯一の選択肢といったわけではありません。\nPerl環境では、実にさまざまなフレームワークが提供されています"
+			   },
+		updated => \'NOW()',
+		});
+		
+	$c->response->body('データの登録に成功しました');
+}
+
+sub xml_read :Local {
+	my ($self, $c) = @_;
+	
+	$c->stash->{doc} = $c->model('CatalDB::Document')->find('DC-00')->doc;
+
+}
+
+# 2010-11-18
+sub dbi :Local {
+	my ($self, $c) = @_;
+	
+	my $db = $c->model('Catal')->dbh;
+	
+	$db->do('set names utf8');
+	
+	my $stt = $db->prepare('SELECT * FROM book ORDER BY published DESC');
+	
+	$stt->execute();
+	
+	my @data = ();
+	
+	while(my $row = $stt->fetchrow_hashref()){
+		push @data, $row;
+	}
+
+	$c->stash->{list} = \@data;
+	$c->stash->{template} = 'resultset/list.tt';
 }
 
 

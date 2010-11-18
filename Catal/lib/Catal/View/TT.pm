@@ -3,12 +3,24 @@ package Catal::View::TT;
 use strict;
 use warnings;
 
+use Encode;
 use base 'Catalyst::View::TT';
 
 __PACKAGE__->config(
     TEMPLATE_EXTENSION => '.tt',
     render_die => 1,
+    COMPILE_DIR => './tmp',
+    COMPILE_EXT => '.ttc',
+    FILTERS => {
+    	'utf8' => [ \&utf8_filter, 0],
+    },
 );
+
+sub utf8_filter{
+	my $text = shift;
+	return encode('utf8', $text);
+
+}
 
 =head1 NAME
 
