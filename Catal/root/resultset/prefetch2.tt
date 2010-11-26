@@ -1,17 +1,13 @@
 <dl>
-[%- FOREACH item = list -%]
-<dt>[% item.title | html %]([% item.publish | html %])</dt>
-
-
-	[% IF item.book_review.size > 0 %]
-
-	[%- FOREACH coment = item.book_review -%]
-
-<dd>[% item.book_review.0.body | html %]</dd>
-<dd>[% item.book_review.0.uid | html %]</dd>
-<dd>[% item.book_review.0.updated | html %]</dd>
-
-	[%- END -%]
-
-[%- END -%]
+[% FOREACH item = list -%]
+  <dt>[% item.title | html %]（[% item.publish | html %]）</dt>
+  <dd>
+    [% IF item.book_review.size%]
+	[% item.book_review.size %] hoge hoge <br />
+      [% item.book_review.0.body | html %]<br />
+      （[% item.book_review.0.uid | html %]）
+      [% item.book_review.0.updated | html %]
+    [%- END -%]
+  </dd>
+[%- END %]
 </dl>

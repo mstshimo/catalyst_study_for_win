@@ -3,6 +3,7 @@ package Catal::Controller::Resultset;
 use strict;
 use warnings;
 use parent 'Catalyst::Controller';
+use Catal::Api::Book;
 
 =head1 NAME
 
@@ -393,6 +394,14 @@ sub dbi :Local {
 	$c->stash->{template} = 'resultset/list.tt';
 }
 
+# 2010-11-26
+sub adaptor :Local {
+	my ($self, $c) = @_;
+	my $book = new Catal::Api::Book();
+	
+	$c->stash->{list} = $book->getInfosByPublish('インプレス');
+	$c->stash->{template} = 'resultset/list.tt';
+}
 
 =head1 AUTHOR
 
