@@ -3,7 +3,7 @@ package Catal::Controller::Resultset;
 use strict;
 use warnings;
 use parent 'Catalyst::Controller';
-use Catal::Api::Book;
+#use Catal::Api::Book;
 
 =head1 NAME
 
@@ -394,13 +394,19 @@ sub dbi :Local {
 	$c->stash->{template} = 'resultset/list.tt';
 }
 
-# 2010-11-26
+
 sub adaptor :Local {
 	my ($self, $c) = @_;
-	my $book = new Catal::Api::Book();
-	
+#	my $book = new Catal::Api::Book();
+	my $book = $c->model('BookAdaptor');
 	$c->stash->{list} = $book->getInfosByPublish('インプレス');
 	$c->stash->{template} = 'resultset/list.tt';
+}
+
+sub adaptor2 :Local {
+	my ($self, $c) = @_;
+	
+	$c->response->body($c->model('DateTimeAdaptor'));
 }
 
 =head1 AUTHOR
