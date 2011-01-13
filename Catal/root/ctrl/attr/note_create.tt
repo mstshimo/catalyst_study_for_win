@@ -1,0 +1,10 @@
+[% #自分自身にPOST %]
+<form method="POST">
+件名:<br />
+
+<input type="text" name="title" size="60" maxlength="50" /> <br />
+
+本文:<br />
+<textarea name="body" cols="50" rows="15"></textarea><br />
+<input type="submit" value="保存" />
+</form>

@@ -1,0 +1,15 @@
+<h2>[% item.title | html%]</h2>
+<hr />
+[% item.body | html | html_line_break %]
+<hr />
+最終更新時刻:[% item.updated.strftime('%Y/%m/%d %H:%M:%S') %]
+
+[% #対応するアクションの編集/削除 %]
+[%- ctrl = c.controller('Ctrl::Attr') -%]
+<form method="POST" action="[% c.uri_for(ctrl.action_for('note_delete'), c.req.captures) %]">
+
+<input type="button" value="更新" onclick="location.href='[% c.uri_for(ctrl.action_for('note_edit'), c.req.captures) %]'" />
+
+<input type="submit" value="削除" />
+
+</form>

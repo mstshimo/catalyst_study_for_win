@@ -1,0 +1,13 @@
+<ul>
+[% #ノートの一覧をリストに整形 %]
+[% FOREACH item = list %]
+    <li>
+		[% #memoへのリンク生成 %]
+		<a href="[% c.uri_for('/memo', item.mid) %]" >
+			[% item.title | html %]
+			([% item.updated.strftime('%Y/%m/%d %H:%M:/%S')  %])
+		</a>
+	</li>
+[% END %]
+</ul>
+[<a href="[% c.uri_for('/memo/create') %]">新規作成</a>]

@@ -35,7 +35,6 @@ sub intro :Local{
 	my ($self, $c) = @_;
 	
 	$c->res->body('こんにちは、世界！');
-
 }
 
 # 2010-12-10
@@ -110,6 +109,105 @@ sub chain_args :Chained('chain_second') :PathPart('args') :Args(2){
 	
 	$c->stash->{body} .= "<p>chain_argsアクション:$first, $second</p>";
 	$c->res->body($c->stash->{body});
+}
+
+# 2010-12-24
+sub chain_parent :ChainedParent :PathPart('child'){
+	my ($self, $c) = @_;
+
+	$c->stash->{body} .= '<p>chain_parentアクション[Ctrl/Attr]</p>';
+	$c->res->body($c->stash->{body});
+}
+
+# 2011-01-13
+# 連鎖アクションの基点
+sub note_base :Chained('/') :PathPart('memo') CaptureArgs(0){
+	my ($self, $c) = @_;
+
+	$c->stash->{memo} = $c->model('CatalDB::Memo');
+}
+
+# すべてのメモをリスト表示
+sub note_all :Chained('note_base') :PathPart('all') :Args(0){
+	my ($self, $c) = @_;
+
+	$c->stash->{list} = [$c->stash->{memo}->search({}, {order_by => {-asc => 'updated'}})]
+
+}
+
+# 新規のメモを登録
+sub note_create :Chained('note_base') :PathPart('create') :Args(0) {
+	my ($self, $c) = @_;
+
+	# postアクセス
+	if($c->req->method eq 'POST'){
+		$c->stash->{memo}->create({
+			title => $c->req->body_params->{title},
+			body => $c->req->body_params->{body},
+			updated => \'NOW()',
+		});
+
+		$c->res->redirect($c->uri_for('/memo/all'), 303);
+	}
+
+	# getアクセスの場合は、対応する登録フォームを表示
+}
+
+# 特定のメモ情報を取得
+sub note_details :Chained('note_base') :PathPart('') :CaptureArgs(1){
+	my ($self, $c, $mid) = @_;
+
+	$c->stash->{item} = $c->stash->{memo}->find($mid);
+
+	# 該当するメモが存在しない場合は、エラーメッセージ
+	if(!$c->stash->{item}){
+		$c->res->body("not found memo ${mid}.");
+
+		# 連鎖アクション終了
+		$c->detach();
+	}
+}
+
+
+# note_detailsアクションを引き継いで、メモ情報を表示
+sub note_show :Chained('note_details') :PathPart('') :Args(0){
+
+}
+
+# 既存のメモを編集
+sub note_edit :Chained('note_details') :PathPart('edit') :Args(0){
+	my ($self, $c) = @_;
+
+	# postアクセス
+	if($c->req->method eq 'POST'){
+		my $row = $c->stash->{item};
+		$row->title($c->req->body_params->{title});
+		$row->body($c->req->body_params->{body});
+		$row->updated(\'NOW()');
+		$row->update;
+
+		#更新処理に成功したら、一覧へリダイレクト
+		$c->res->redirect($c->uri_for('/memo/all'), 303);
+	}
+
+	# getアクセスの場合は、対応する登録フォームを表示
+
+}
+
+
+sub note_delete :Chained('note_details') :PathPart('delete') :Args(0){
+	my ($self, $c) = @_;
+
+	# postアクセス
+	if($c->req->method eq 'POST'){
+		$c->stash->{item}->delete;
+
+		# 削除に成功したら、一覧へリダイレクト
+		$c->res->redirect($c->uri_for('/memo/all'), 303);
+	}
+
+	# getアクセスの場合は、エラー
+	$c->res->body('アクセスが拒否されました。');
 }
 
 
