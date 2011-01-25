@@ -141,6 +141,12 @@ sub note_create :Chained('note_base') :PathPart('create') :Args(0) {
 
 	# postアクセス
 	if($c->req->method eq 'POST'){
+		# validation
+		$c->forward('note_validate');
+		if(scalar @{$c->stash->{errors}}){
+			$c->go('note_error');
+		}
+	
 		$c->stash->{memo}->create({
 			title => $c->req->body_params->{title},
 			body => $c->req->body_params->{body},
@@ -180,6 +186,12 @@ sub note_edit :Chained('note_details') :PathPart('edit') :Args(0){
 
 	# postアクセス
 	if($c->req->method eq 'POST'){
+		# validation
+		$c->forward('note_validate');
+		if(scalar @{$c->stash->{errors}}){
+			$c->go('note_error');
+		}
+
 		my $row = $c->stash->{item};
 		$row->title($c->req->body_params->{title});
 		$row->body($c->req->body_params->{body});
@@ -210,6 +222,23 @@ sub note_delete :Chained('note_details') :PathPart('delete') :Args(0){
 	$c->res->body('アクセスが拒否されました。');
 }
 
+
+sub note_validate :Private{
+	my ($self, $c) = @_;
+
+	# リクエスト取得
+	my $p = $c->req->body_params;
+
+	my @errs;
+
+	push @errs, '件名を入力してください' unless $p->{title};
+	push @errs, '本文を入力してください' unless $p->{body};
+
+	$c->stash->{errors} = \@errs;
+
+}
+
+sub note_error :Private{};
 
 =head1 AUTHOR
 
