@@ -45,7 +45,19 @@ Attempt to render a view, if needed.
 
 =cut
 
-sub end : ActionClass('RenderView') {}
+sub end : ActionClass('RenderView') {
+	my ($self, $c) = @_;
+
+	if(scalar @{$c->error}){
+		$c->stash->{errors} = $c->error;
+		$c->stash->{template} = "errors.tt";
+
+		# エラー情報stashに入れたら、コンテキストはクリアする
+		$c->clear_errors();
+	}
+
+}
+
 
 =head1 AUTHOR
 
