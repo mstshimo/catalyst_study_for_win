@@ -39,6 +39,29 @@ sub default :Path {
     $c->response->status(404);
 }
 
+
+# 20110127
+sub auto :Pirvate{
+	my ($self, $c) = @_;
+
+	# パス/loginによるループ回避
+	if($c->action->reverse eq 'login'){
+		return 1;
+	}
+
+	# 未認証のとき、認証処理へリダイレクト
+	if(!$c->user_exists){
+		$c->res->redirect($c->uri_for('/login'));
+
+		# 移行のautoアクションを中止
+		return 0;
+	}
+	
+	# 本来のリクエストを継続
+	return 1;
+
+}
+
 =head2 end
 
 Attempt to render a view, if needed.
@@ -52,11 +75,45 @@ sub end : ActionClass('RenderView') {
 		$c->stash->{errors} = $c->error;
 		$c->stash->{template} = "errors.tt";
 
-		# �G���[���stash�ɓ��ꂽ��A�R���e�L�X�g�̓N���A����
+		# エラー情報stashに入れたら、コンテキストはクリアする
 		$c->clear_errors();
 	}
 
 }
+
+sub login :Local{
+	my ($self, $c) = @_;
+
+	my $uid = $c->req->body_params->{'uid'};
+	my $passwd = $c->req->body_params->{'passwd'};
+
+use Data::Dumper;
+warn Dumper($uid);
+warn Dumper($passwd);
+warn Dumper($c->req->body_params);
+
+	if($uid ne '' && $passwd ne ''){
+warn Dumper($uid);
+warn Dumper($passwd);
+
+		if($c->authenticate({uid => $uid, passwd => $passwd})){
+			$c->res->body('こんちには、' . $c->user->get('unam') . 'さん!');
+		}else{
+			$c->stash->{error} = 'ユーザ名、またはパスワードが間違っています。';
+		}
+	}
+
+}
+
+
+sub logout :Local{
+	my ($self, $c) = @_;
+
+	$c->logout;
+
+	$c->res->redirect($c->uri_for('/'));
+}
+
 
 
 =head1 AUTHOR

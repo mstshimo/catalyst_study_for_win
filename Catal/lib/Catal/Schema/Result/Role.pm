@@ -44,6 +44,7 @@ __PACKAGE__->set_primary_key("rid");
 
 # Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-05-27 20:59:29
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3cXdqVgnwPydxV/jG7IJ6g
+__PACKAGE__->has_many(map_user_roles => 'Catal::Schema::Result::UsrRole', 'rid');
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

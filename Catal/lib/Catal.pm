@@ -15,8 +15,18 @@ use Catalyst::Runtime 5.80;
 
 use parent qw/Catalyst/;
 use Catalyst qw/-Debug
-                ConfigLoader
-                Static::Simple/;
+				ConfigLoader
+				Static::Simple
+				Session
+				Session::Store::File
+				Session::State::Cookie
+				Authentication
+				Authorization::Roles
+				FillInForm
+				FormValidator::Simple
+				FormValidator::Simple::Auto
+				Cache
+/;
 our $VERSION = '0.01';
 
 # Configure the application.
@@ -32,6 +42,47 @@ our $VERSION = '0.01';
 __PACKAGE__->config( name => 'Catal',
 					 default_view => 'TT',
 					 default_model => 'CatalDB',
+					 'Plugin::Session' => {
+						expires => 1800,
+						storage => 'c:/tmp',
+						namespace => 'MyApp',
+						cookie_expires => 0,
+						verify_address => 1,
+						verify_user_agent => 1,
+					 },
+					 'Plugin::Authentication' => {
+						default => {
+							credential => {
+								class => 'Password',
+								password_field => 'passwd',
+								password_type => 'hashed',
+								password_hash_type => 'MD5',
+							},
+							store => {
+								class => 'DBIx::Class',
+								user_model => 'CatalDB::Usr',
+								use_userdata_from_session =>1,
+								role_relation => 'roles',
+								role_field => 'role',
+							}
+						}
+					 },
+					 'validator' => {
+						plugins => [qw/Japanese MyApp/],
+						options => {
+							charset => 'utf8',
+						},
+						profiles => __PACKAGE__->path_to('profiles.yml'),
+						message_format => '<span class="error">%s</span>',
+					 },
+					 'Plugin::Cache' => {
+						'backend' => {
+							class => 'Cache::FileCache',
+							cache_root => 'C:/tmp',
+							namespace => 'MyApp',
+							default_expires_in => 30,
+						}
+					 },
 );
 
 

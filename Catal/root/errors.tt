@@ -1,0 +1,16 @@
+<html>
+<head>
+<title>カスタムエラーページ</title>
+</head>
+<body>
+以下のエラーが発生しました。<br />
+
+<a href="mailto:hogeeee@msworks.homelinux.com">システム管理者</a>に連絡するか時間をおいてから再度アクセスをお願いします。
+
+<ul>
+[%- FOREACH item = errors %]
+	<li>[% item | html%]</li>
+[% END -%]
+</ul>
+</body>
+</html>

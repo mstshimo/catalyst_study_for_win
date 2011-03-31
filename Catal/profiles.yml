@@ -1,0 +1,32 @@
+plugin/validate_basic:
+  name:
+    - rule: NOT_BLANK
+      message: 名前は必須入力です。
+
+
+plugin/validate:
+  isbn:
+    - rule: NOT_BLANK
+      message: ISBNコードは必須です
+   # - rule: ['REGEX', '^978-4-[0-9]{2,5}-[0-9]{2,5}-[0-9A-Z]{1}$']
+    - rule: ISBN
+      message: ISBNコードは正しい形式で入力してください。
+    - rule: ['LENGTH', 17]
+      message: ISBNコードは17文字で記述してください。
+  title:
+    - rule: NOT_BLANK
+      message: 書名は必須です。
+    - rule: ['JLENGTH', 1, 50]
+      message: 書名は50文字以内で入力してください。
+  price:
+    - rule: ['BETWEEN', 1, 10000]
+      message: 価格は1～10000の範囲で入力してください。
+  publish:
+    - rule: ['IN_ARRAY', 'インプレス', '翔泳社', '技術評論者', '日経BPソフトプレス', 'test']
+      message: 出版社決められたオプションの中から選択してください。
+  published: 
+    - rule: ['DATETIME_STRPTIME', '%Y/%m/%d']
+      message: 刊行日はYYYY/MM/DDの形式で入力してください。
+  mails:
+    - rule: DUPLICATION
+      message: メールアドレスとメールアドレス(確認用)は等しくなければなりません。

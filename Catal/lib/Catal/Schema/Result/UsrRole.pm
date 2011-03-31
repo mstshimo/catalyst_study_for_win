@@ -44,7 +44,8 @@ __PACKAGE__->set_primary_key("uid", "rid");
 
 # Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-05-27 20:59:29
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FoWiwN3vWvdbosiQ59uX+w
-
+__PACKAGE__->belongs_to(user => 'Catal::Schema::Result::Usr', 'uid');
+__PACKAGE__->belongs_to(role => 'Catal::Schema::Result::Role', 'rid');
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;

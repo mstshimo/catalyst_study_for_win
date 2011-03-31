@@ -1,0 +1,28 @@
+[% %]
+
+[% IF! c.user_exists %]
+	<form method ="POST">
+		<p>
+			<label for="uid">ユーザ名:<label><br />
+			<input type="text" id="uid" name="uid" size="15 /">
+		</p>
+
+		<p>
+			<label for="passwd">パスワード:<label><br />
+			<input type="password" id="passwd" name="passwd" size="15 /">
+		</p>
+
+		<p>
+			<input type="submit" value="ログイン">
+		</p>
+
+	</form>
+
+<div style="color:Red;">[% error | html %]</div>
+[% ELSE %]
+ログイン済みです<br />
+
+あなたが、[% c.user.get('unam') %]さんでない場合は、
+<a href="[% c.uri_for('/logout') %]">ログアウト</a>して下しさい。
+
+[% END %]

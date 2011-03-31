@@ -1,0 +1,9 @@
+[% # 検証エラーが検出された場合のみ処理 %]
+[% IF error.has_error %]
+	[% # 現在のアクションのエラーメッセージを順に出力 %]
+	<ul>
+	[% FOREACH msg IN error.messages(c.action.reverse) %]
+		<li>[% msg | utf8 %]</li>
+	[% END %]
+	</ul>
+[% END %]

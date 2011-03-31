@@ -1,0 +1,43 @@
+<form method="POST">
+<p>
+	<label for="isbn">ISBN:</label>
+	<input type="text" name="isbn" size="20" />
+</p>
+
+<p>
+	<label for="title">書名:</label>
+	<input type="text" name="title" size="50" />
+</p>
+
+<p>
+	<label for="price">価格:</label>
+	<input type="text" name="price" size="5" />円
+</p>
+
+<p>
+	<label for="publish">出版社:</label>
+	<input type="text" name="publish" size="15" />
+</p>
+
+<p>
+	<label for="published">刊行日:</label>
+	<input type="text" name="published" size="15" />
+</p>
+
+<p>
+	<label for="mail">メール:</label>
+	<input type="text" name="mail" size="20" />
+</p>
+
+<p>
+	<label for="mail_confirm">メール:</label>
+	<input type="text" name="mail_confirm" size="20" />
+</p>
+
+
+<p>
+	<input type="submit" value="登録" />
+</p>
+</form>
+[% #エラーメッセージ表示 %]
+[%- PROCESS err_msgs.tt -%]

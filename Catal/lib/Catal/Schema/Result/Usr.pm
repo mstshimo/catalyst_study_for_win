@@ -66,5 +66,10 @@ __PACKAGE__->has_many(usr_review => 'Catal::Schema::Result::Review', 'uid');
 __PACKAGE__->many_to_many(books => 'usr_review', 'book');
 
 
+# 20110127
+__PACKAGE__->has_many(map_user_roles => 'Catal::Schema::Result::UsrRole', 'uid');
+__PACKAGE__->many_to_many(roles => 'map_user_roles', 'role');
+
+
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;
